@@ -2,6 +2,7 @@ package model;
 
 public class Config {
     Boolean mitJoker;
+    Boolean mitTimer;
     int spielfeldlaenge;
     int getSpielfeldBreite;
 
@@ -13,6 +14,14 @@ public class Config {
 
     public void setMitJoker(Boolean mitJoker) {
         this.mitJoker = mitJoker;
+    }
+
+    public Boolean getMitTimer() {
+        return mitTimer;
+    }
+
+    public void setMitTimer(Boolean mitTimer) {
+        this.mitTimer = mitTimer;
     }
 
     public int getSpielfeldlaenge() {

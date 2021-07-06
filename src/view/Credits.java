@@ -17,7 +17,7 @@ public class Credits {
                 "Jonas Rhybary \n");
         dialog.setTitle("Made by");
 
-        text.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        text.setFont(new Font("Impact", Font.PLAIN, 20));
 
         dialog.setSize(300,200);
 

@@ -29,7 +29,7 @@ public class newGameGUI {
         ende.setModal(true);
 
         contentArea = new JTextArea("Hier haben Sie die Wahl, ob Sie die Punkte übernehmen wollen oder nicht!");
-        contentArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        contentArea.setFont(new Font("Impact", Font.PLAIN, 20));
         contentArea.setBackground(new Color(21, 76, 121));
         contentArea.setEditable(false);
         contentArea.setBorder(new EmptyBorder(50, 50, 50, 50));

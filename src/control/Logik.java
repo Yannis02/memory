@@ -81,11 +81,7 @@ public class Logik {
     }
 
     public boolean compare(String text1, Color color1, String text2, Color color2){
-        /*try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
+
         if (text1.equals(text2) && color1 == color2){
             anzPairsFound++;
             return true;

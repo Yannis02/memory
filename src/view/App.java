@@ -43,10 +43,10 @@ public class App extends JFrame {
         EmptyBorder border = new EmptyBorder(80, 0, 80, 0);
         titel.setBorder(border);
 
-        titel.setFont(new Font("Comic Sans MS", Font.PLAIN, 65));
-        startGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 45));
-        konfigurationen.setFont(new Font("Comic Sans MS", Font.PLAIN, 45));
-        ersteller.setFont(new Font("Comic Sans MS", Font.PLAIN, 45));
+        titel.setFont(new Font("Impact", Font.PLAIN, 65));
+        startGame.setFont(new Font("Impact", Font.PLAIN, 45));
+        konfigurationen.setFont(new Font("Impact", Font.PLAIN, 45));
+        ersteller.setFont(new Font("Impact", Font.PLAIN, 45));
 
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         konfigurationen.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -101,6 +101,12 @@ public class App extends JFrame {
 
     public static void main(String[] args) {
         App app = new App();
+        if (Konfiguration.variable == true){
+            System.out.println("Timer");
+        }
+        if (Konfiguration.variable == false){
+            System.out.println("Joker");
+        }
     }
 
 

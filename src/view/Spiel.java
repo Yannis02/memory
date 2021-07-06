@@ -1,6 +1,7 @@
 package view;
 
 import control.Logik;
+import model.Config;
 import model.Field;
 import model.Spieler;
 
@@ -20,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class Spiel extends JFrame {
 
     Logik logik = new Logik();
+    public boolean joker2 = false;
+    public boolean timer = false ;
     private JButton firstOpenedCard = new JButton();
     private JButton secondOpenedCard = new JButton();
     private Field field = new Field();
@@ -41,10 +44,17 @@ public class Spiel extends JFrame {
     private JPanel player1Panel;
     private JPanel player2Panel;
 
-    private DecimalFormat decimalFormatPoints = new DecimalFormat("000");
+    private DecimalFormat decimalFormatPoints = new DecimalFormat("00");
 
 
     public Spiel(Spieler spieler1, Spieler spieler2) {
+        Konfiguration config = new Konfiguration();
+        if (config.isTimer()== false){
+            System.out.println("Yes");
+        }
+        else if (Konfiguration.timer == true){
+            System.out.println("hahahah");
+        }
         setTitle("Memory");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         getContentPane().setBackground(new Color(21,76,121));
@@ -56,34 +66,34 @@ public class Spiel extends JFrame {
 
 
         titleLabel = new JLabel("Memory", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 65));
+        titleLabel.setFont(new Font("Impact", Font.PLAIN, 65));
         EmptyBorder titleborder = new EmptyBorder(80, 0, 100, 0);
         titleLabel.setBorder(titleborder);
 
 
         nameLabel1 = new JLabel(spieler1.getName());
         nameLabel2 = new JLabel(spieler2.getName());
-        nameLabel1.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-        nameLabel2.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-        nameLabel1.setBackground(Color.white);
-        nameLabel2.setBackground(Color.white);
+        nameLabel1.setFont(new Font("Impact", Font.PLAIN, 35));
+        nameLabel2.setFont(new Font("Impact", Font.PLAIN, 35));
+        nameLabel1.setBackground(new Color(21,76,121));
+        nameLabel2.setBackground(new Color(21,76,121));
         nameLabel1.setOpaque(true);
         nameLabel2.setOpaque(true);
         nameLabel1.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nameLabel1.setBorder(new LineBorder(Color.black, 4));
-        nameLabel2.setBorder(new LineBorder(Color.black, 4));
+        nameLabel1.setBorder(new LineBorder(new Color(21,76,121), 2));
+        nameLabel2.setBorder(new LineBorder(new Color(21,76,121), 2));
 
         pointLabel1 = new JLabel(decimalFormatPoints.format(spieler1.getScore()));
         pointLabel2 = new JLabel(decimalFormatPoints.format(spieler2.getScore()));
-        pointLabel1.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-        pointLabel2.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-        pointLabel1.setBackground(Color.white);
+        pointLabel1.setFont(new Font("Impact", Font.PLAIN, 35));
+        pointLabel2.setFont(new Font("Impact", Font.PLAIN, 35));
+        pointLabel1.setBackground(new Color(21,76,121));
         pointLabel1.setOpaque(true);
-        pointLabel2.setBackground(Color.white);
+        pointLabel2.setBackground(new Color(21,76,121));
         pointLabel2.setOpaque(true);
-        pointLabel1.setBorder(new LineBorder(Color.black, 4));
-        pointLabel2.setBorder(new LineBorder(Color.black, 4));
+        pointLabel1.setBorder(new LineBorder(new Color(21,76,121), 2));
+        pointLabel2.setBorder(new LineBorder(new Color(21,76,121), 2));
         pointLabel1.setAlignmentX(Component.CENTER_ALIGNMENT);
         pointLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -101,7 +111,7 @@ public class Spiel extends JFrame {
             JButton button = new JButton(String.valueOf(field.getCardVector().get(i).getValue()));
             button.setForeground(new Color(21,76,121));
             button.setBackground(field.getCardVector().get(i).getBackgroundcolor());
-            button.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
+            button.setFont(new Font("Impact", Font.BOLD, 25));
             button.setBorder(new LineBorder(Color.black, 4));
             button.setOpaque(false);
             button.addActionListener(new cardbuttonListener());
@@ -127,7 +137,7 @@ public class Spiel extends JFrame {
         buttonPanel.add(beenden);
         buttonPanel.add(Box.createRigidArea(new Dimension(45, 0)));
         buttonPanel.setBackground(new Color(21,76,121));
-        buttonPanel.setBorder(new EmptyBorder(0, 0, 30, 0));
+        buttonPanel.setBorder(new EmptyBorder(100, 0, 30, 30));
 
         //playerPanel
         player1Panel = new JPanel();

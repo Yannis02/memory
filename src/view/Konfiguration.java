@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
  */
 
 public class Konfiguration extends JFrame {
+
     JPanel topPanel;
     JPanel midPanel;
     JPanel botPanel;
@@ -24,6 +25,10 @@ public class Konfiguration extends JFrame {
     JPanel timerPanel;
     JLabel timerLabel;
     JButton timerSubmitButton;
+    Config config = new Config();
+    public static boolean variable;
+    public static boolean joker;
+    public static boolean timer;
 
     public Konfiguration getKonfiguration() {
         return konfiguration;
@@ -36,9 +41,9 @@ public class Konfiguration extends JFrame {
     Konfiguration konfiguration;
 
 
-    String[] withJokerArray ={"Yes", "No"};
+    String[] withJokerArray ={"No", "Yes"};
     JComboBox withJoker;
-    String[] withTimerArray ={"Yes", "No"};
+    String[] withTimerArray ={"No", "Yes"};
     JComboBox withTimer;
     JButton submitButton;
     //Attributes
@@ -66,6 +71,7 @@ public class Konfiguration extends JFrame {
         jokerSubmitButton = new JButton("OK");
         withJoker = new JComboBox();
         withJoker.setModel(new DefaultComboBoxModel(withJokerArray));
+
         //with Timer
         timerPanel = new JPanel();
         timerLabel = new JLabel("Do you want to play with Timer?    ");
@@ -73,11 +79,20 @@ public class Konfiguration extends JFrame {
         withTimer = new JComboBox();
         withTimer.setModel(new DefaultComboBoxModel(withTimerArray));
         submitButton = new JButton("Save and Continue");
-        original = new Font("Comic Sans MS", Font.BOLD,18);
-        titleFont = new Font("Comic Sans MS", Font.BOLD,32);
+        original = new Font("Impact", Font.BOLD,18);
+        titleFont = new Font("Impact", Font.BOLD,32);
         teal = new Color(170, 241, 237);
         mandarine = new Color(248, 205, 171);
     }
+
+    public boolean isJoker() {
+        return joker;
+    }
+
+    public boolean isTimer() {
+        return timer;
+    }
+
     public void modify(){
         midPanel.setLayout(new GridLayout(3,1));
     }
@@ -103,20 +118,42 @@ public class Konfiguration extends JFrame {
         this.setVisible(true);
     }
 
+
+
+
     public void addListener(){
         jokerSubmitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                withJoker.getSelectedIndex();
+               if (withJoker.getSelectedIndex() == 0){
+                 config.setMitJoker(false);
+               joker = false;}
+               else if(withJoker.getSelectedIndex() == 1){
+                   config.setMitJoker(true);
+                   joker = true;
+               }
+            }
+        });
+
+        timerSubmitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (withTimer.getSelectedIndex() == 0){
+                    config.setMitTimer(false);
+                timer = false;
+                }
+                else if(withTimer.getSelectedIndex() == 1){
+                    config.setMitTimer(true);
+                    timer = true;
+                }
+                 variable = timer;
             }
         });
 
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Test");
                 setVisible(false);
-                App app = new App();
             }
         });
     }

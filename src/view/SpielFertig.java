@@ -31,7 +31,7 @@ public class SpielFertig {
                 " beenden?\n\n Dann klicken Sie auf den Beenden Button!\n\n" +
                 "Wollen Sie jedoch ein neues Spiel starten,\nso drücken Sie auf den Neues Spiel Button:\n\n" +
                 "Wollen Sie wieder zurück ins Startmenü so drücken Sie Startmenü");
-        contentArea.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        contentArea.setFont(new Font("Impact", Font.PLAIN, 20));
         contentArea.setBackground(new Color(21, 76, 121));
         contentArea.setEditable(false);
         contentArea.setBorder(new EmptyBorder(50, 50, 50, 50));
