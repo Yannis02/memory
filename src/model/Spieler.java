@@ -26,10 +26,6 @@ public class Spieler implements JPlayerLabelModel {
         this.punkte = punkte;
     }
 
-    public void updateHighscore(){
-        //folgt
-        plm.fireScoreChanged();
-    }
 
 
     @Override

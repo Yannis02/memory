@@ -87,4 +87,8 @@ public class Field {
     public Vector<Card> getCardVector() {
         return cardVector;
     }
+
+    public int getAmountCards() {
+        return amountCards;
+    }
 }
