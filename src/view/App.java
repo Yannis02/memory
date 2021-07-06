@@ -17,7 +17,6 @@ public class App extends JFrame {
     private JButton startGame;
     private JButton konfigurationen;
     private JButton ersteller;
-    private JButton namen;
 
     private JPanel buttonPanel;
     private JPanel buttonBoxPanel;
@@ -39,7 +38,7 @@ public class App extends JFrame {
         startGame = new JButton("Start Game");
         ersteller = new JButton("Made by");
         konfigurationen = new JButton("Settings");
-        namen = new JButton("Players");
+
 
         EmptyBorder border = new EmptyBorder(80, 0, 80, 0);
         titel.setBorder(border);
@@ -48,12 +47,11 @@ public class App extends JFrame {
         startGame.setFont(new Font("Comic Sans MS", Font.PLAIN, 45));
         konfigurationen.setFont(new Font("Comic Sans MS", Font.PLAIN, 45));
         ersteller.setFont(new Font("Comic Sans MS", Font.PLAIN, 45));
-        namen.setFont(new Font("Comic Sans MS", Font.PLAIN, 45));
 
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         konfigurationen.setAlignmentX(Component.CENTER_ALIGNMENT);
         ersteller.setAlignmentX(Component.CENTER_ALIGNMENT);
-        namen.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 
 
         buttonBoxPanel = new JPanel();
@@ -63,8 +61,6 @@ public class App extends JFrame {
         buttonBoxPanel.add(konfigurationen);
         buttonBoxPanel.add(Box.createRigidArea(new Dimension(0, 45)));
         buttonBoxPanel.add(ersteller);
-        buttonBoxPanel.add(Box.createRigidArea(new Dimension(0, 45)));
-        buttonBoxPanel.add(namen);
         buttonPanel = new JPanel();
         buttonPanel.add(buttonBoxPanel);
 
@@ -80,6 +76,7 @@ public class App extends JFrame {
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setVisible(false);
                 logik.spiel();
             }
         });
@@ -95,12 +92,7 @@ public class App extends JFrame {
                 Konfiguration konfiguration = new Konfiguration();
             }
         });
-        namen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SetPlayers setPlayers = new SetPlayers();
-            }
-        });
+
 
 
         setVisible(true);

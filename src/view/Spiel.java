@@ -23,6 +23,7 @@ public class Spiel extends JFrame {
     private JButton firstOpenedCard = new JButton();
     private JButton secondOpenedCard = new JButton();
     private Field field = new Field();
+    private String winner;
 
     private List<JButton> buttons = new ArrayList<>();
 
@@ -32,9 +33,8 @@ public class Spiel extends JFrame {
     private JLabel pointLabel1;
     private JLabel pointLabel2;
 
-    private JButton reset;
+    private JButton settings;
     private JButton beenden;
-    private JButton hilfe;
 
     private JPanel cardPanel;
     private JPanel buttonPanel;
@@ -47,7 +47,7 @@ public class Spiel extends JFrame {
     public Spiel(Spieler spieler1, Spieler spieler2) {
         setTitle("Memory");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        getContentPane().setBackground(new Color(255, 171, 0));
+        getContentPane().setBackground(new Color(21,76,121));
         setResizable(true);
         setLayout(new BorderLayout(100, 0));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,16 +92,14 @@ public class Spiel extends JFrame {
         //player2 = new JPlayerLabel();
 
 
-        reset = new JButton("Reset");
+        settings = new JButton("Settings");
         beenden = new JButton("Beenden");
-        hilfe = new JButton("Hilfe");
 
 
         //Karten-Buttons erstellen und zu List adden
         for (int i = 0; i < 36; i++) {
             JButton button = new JButton(String.valueOf(field.getCardVector().get(i).getValue()));
-            //button.setBackground(new Color(255,255,255,0));
-            button.setForeground(new Color(255, 171, 0));
+            button.setForeground(new Color(21,76,121));
             button.setBackground(field.getCardVector().get(i).getBackgroundcolor());
             button.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
             button.setBorder(new LineBorder(Color.black, 4));
@@ -117,20 +115,18 @@ public class Spiel extends JFrame {
         for (JButton button : buttons) {
             cardPanel.add(button);
         }
-        cardPanel.setBackground(new Color(255, 171, 0));
+        cardPanel.setBackground(new Color(21,76,121));
         cardPanel.setBorder(new EmptyBorder(0, 0, 100, 0));
 
 
         //buttonPanel
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
-        buttonPanel.add(reset);
+        buttonPanel.add(settings);
         buttonPanel.add(Box.createRigidArea(new Dimension(45, 0)));
         buttonPanel.add(beenden);
         buttonPanel.add(Box.createRigidArea(new Dimension(45, 0)));
-        buttonPanel.add(hilfe);
-        buttonPanel.add(Box.createRigidArea(new Dimension(45, 0)));
-        buttonPanel.setBackground(new Color(255, 171, 0));
+        buttonPanel.setBackground(new Color(21,76,121));
         buttonPanel.setBorder(new EmptyBorder(0, 0, 30, 0));
 
         //playerPanel
@@ -157,6 +153,22 @@ public class Spiel extends JFrame {
         getContentPane().add(player1Panel, BorderLayout.WEST);
         getContentPane().add(player2Panel, BorderLayout.EAST);
 
+
+
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Konfiguration config = new Konfiguration();
+            }
+        });
+
+        beenden.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                App app = new App();
+            }
+        });
 
         setVisible(true);
     }
@@ -204,9 +216,9 @@ public class Spiel extends JFrame {
 
         public void twoTurnedNotEqual(JButton card1, JButton card2) {
             card1.setOpaque(false);
-            card1.setForeground(new Color(255, 171, 0));
+            card1.setForeground(new Color(21,76,121));
             card2.setOpaque(false);
-            card2.setForeground(new Color(255, 171, 0));
+            card2.setForeground(new Color(21,76,121));
             card1.setEnabled(true);
             card2.setEnabled(true);
 
@@ -228,14 +240,12 @@ public class Spiel extends JFrame {
 
             if (logik.getAnzPairsFound() == field.getAmountCards() / 2) {    //Spiel beendet?
                 //glückwunsch-> modal?
-                SpielFertig fertigesSpiel = new SpielFertig();
+                SpielFertig fertigesSpiel = new SpielFertig(winner );
+
             }
         }
     }
 
-    public void timeDelay() throws InterruptedException {
-        Thread.sleep(2000);
-    }
 
 
 }

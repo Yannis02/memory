@@ -25,6 +25,8 @@ public class Credits {
 
         dialog.add(text);
 
+        dialog.setLocationRelativeTo(null);
+
         dialog.setVisible(true);
     }
 

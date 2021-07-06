@@ -6,7 +6,6 @@ import view.JplayerListModel;
 public class Spieler implements JPlayerLabelModel {
     private String name;
     private int punkte;
-    private long highscore;
     private JplayerListModel plm;
 
     public Spieler(){
@@ -15,7 +14,6 @@ public class Spieler implements JPlayerLabelModel {
     public Spieler(String name){
         this.name = name;
         this.punkte = 0;
-        this.highscore = 0;
     }
 
     public void setName(String name) {
@@ -25,7 +23,6 @@ public class Spieler implements JPlayerLabelModel {
     public void setPunkte(int punkte) {
         this.punkte = punkte;
     }
-
 
 
     @Override

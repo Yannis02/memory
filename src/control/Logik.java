@@ -7,9 +7,10 @@ import view.Spiel;
 import java.awt.*;
 
 public class Logik {
-
     private int anzKartenGedreht = 0;
     private int anzPairsFound = 0;
+    public String name1;
+    public String name2;
     private boolean player1WillPlay = true;
     private boolean switchPlayer=false;
     private String sourceCard1;
@@ -24,13 +25,9 @@ public class Logik {
     }
 
     public void spiel() {
-        Spieler spieler1 = new Spieler("Player One");
-        Spieler spieler2 = new Spieler("Player Two");
+        Spieler spieler1 = new Spieler("1. Spieler");
+        Spieler spieler2 = new Spieler("2. Spieler");
         Spiel spiel = new Spiel(spieler1, spieler2);
-
-
-        //Player player1 = new Player();
-        //Player player2 = new Player();
 
     }
 
