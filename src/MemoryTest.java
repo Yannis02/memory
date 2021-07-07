@@ -17,7 +17,7 @@ public class MemoryTest {
     private static Spiel spiel;
     @Before
     public void setUp(){
-        spieler = new Spieler("Spieler 1");
+        spieler = new Spieler("1. Spieler");
         spieler2 = new Spieler("Yannis");
         card = new Card();
         card.setBackground(12,41,52);
@@ -29,7 +29,7 @@ public class MemoryTest {
     }
     @Test
     public void testName(){
-        assertEquals("Spieler 1", spieler.getName());
+        assertEquals("1. Spieler", spieler.getName());
     }
     @Test
     public void cardTest(){
