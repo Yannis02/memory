@@ -2,6 +2,7 @@ package view;
 
 import control.Logik;
 import control.Stoppuhr;
+import model.Config;
 import model.Field;
 import model.Spieler;
 import javax.swing.*;
@@ -11,6 +12,8 @@ import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
+import java.util.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +63,8 @@ public class Spiel extends JFrame {
         field = new Field(isjoker);
         timer2 = istimer;
         joker2 = isjoker;
-        if (timer2== true){
             stoppuhr.start();
-        }
+
 
         //Design
         setTitle("Memory");
@@ -224,7 +226,7 @@ public class Spiel extends JFrame {
             sender.setOpaque(true);
             logik.setGedrehteKarten(logik.getGedrehteKarten() + 1);
 
-                //Falls die Karten identisch sind
+            //Falls die Karten identisch sind
             if (logik.checkgedrehteKarten() == true) {
                 if (logik.compare(firstOpenedCard.getBackground(), sender.getBackground()) == true) {
                     twoTurnedEqual(firstOpenedCard, sender);
@@ -292,9 +294,7 @@ public class Spiel extends JFrame {
             if (logik.getGefundenePaare() == field.getAnzahlKarten() / 2){
 
                 //Falls die Stoppuhr aktiviert wurde
-                if (timer2 == true) {
                     stoppuhr.stop();
-                }
                 setVisible(false);
                 SpielFertig fertigesSpiel = new SpielFertig(stoppuhr.getTime(), Integer.parseInt(points1.getText()), Integer.parseInt(points2.getText()),joker2, timer2);
             }
