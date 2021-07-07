@@ -1,6 +1,7 @@
 package view;
 
 import control.Logik;
+import control.Timer;
 import model.Config;
 import model.Field;
 import model.Spieler;
@@ -21,11 +22,11 @@ import java.util.concurrent.TimeUnit;
 public class Spiel extends JFrame {
 
     Logik logik = new Logik();
+    Field field;
     public boolean joker2 = false;
-    public boolean timer = false ;
+    public boolean timer2 = false ;
     private JButton firstOpenedCard = new JButton();
     private JButton secondOpenedCard = new JButton();
-    private Field field = new Field();
     private String winner;
 
     private List<JButton> buttons = new ArrayList<>();
@@ -45,15 +46,16 @@ public class Spiel extends JFrame {
     private JPanel player2Panel;
 
     private DecimalFormat decimalFormatPoints = new DecimalFormat("00");
+    Timer timer = new Timer();
 
 
-    public Spiel(Spieler spieler1, Spieler spieler2) {
-        Konfiguration config = new Konfiguration();
-        if (config.isTimer()== false){
-            System.out.println("Yes");
-        }
-        else if (Konfiguration.timer == true){
-            System.out.println("hahahah");
+    public Spiel(Spieler spieler1, Spieler spieler2, Boolean istimer, boolean isjoker) {
+        field = new Field(isjoker);
+        timer2 = istimer;
+        joker2 = isjoker;
+        if (timer2== true){
+            timer.start();
+            System.out.println("Timer is true");
         }
         setTitle("Memory");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -162,6 +164,7 @@ public class Spiel extends JFrame {
         getContentPane().add(buttonPanel, BorderLayout.SOUTH);
         getContentPane().add(player1Panel, BorderLayout.WEST);
         getContentPane().add(player2Panel, BorderLayout.EAST);
+        setVisible(true);
 
 
 
@@ -183,15 +186,23 @@ public class Spiel extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-    }
-
 
     class cardbuttonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
             if (logik.getAnzKartenGedreht() == 0) {
+                if (logik.isPlayer1WillPlay()) {
+                    nameLabel1.setBackground(Color.white);
+                    pointLabel1.setBackground(Color.white);
+                    nameLabel2.setBackground(Color.green);
+                    pointLabel2.setBackground(Color.green);
+                } else {
+                    nameLabel1.setBackground(Color.green);
+                    pointLabel1.setBackground(Color.green);
+                    nameLabel2.setBackground(Color.white);
+                    pointLabel2.setBackground(Color.white);
+                }
                 logik.setSourceCard1(String.valueOf(e.getSource()));
             } else {
                 logik.setSourceCard2(String.valueOf(e.getSource()));
@@ -243,17 +254,34 @@ public class Spiel extends JFrame {
             card2.setEnabled(false);
 
             if (logik.isPlayer1WillPlay() == true) {
-                pointLabel1.setText(String.valueOf(decimalFormatPoints.format(Integer.parseInt(pointLabel1.getText()) + 1)));
-            } else {
-                pointLabel2.setText(String.valueOf(decimalFormatPoints.format(Integer.parseInt(pointLabel2.getText()) + 1)));
+                if (card2.getText().equals("111")) {
+                    pointLabel2.setText(String.valueOf(decimalFormatPoints.format(Integer.parseInt(pointLabel2.getText()) + 2)));
+                }else {
+                    pointLabel2.setText(String.valueOf(decimalFormatPoints.format(Integer.parseInt(pointLabel2.getText()) + 1)));
+                }
+            }else {
+                if (card2.getText().equals("111")) {
+                    pointLabel1.setText(String.valueOf(decimalFormatPoints.format(Integer.parseInt(pointLabel1.getText()) + 2)));
+
+                } else {
+                    pointLabel1.setText(String.valueOf(decimalFormatPoints.format(Integer.parseInt(pointLabel1.getText()) + 1)));
+                }
             }
+            card1.setBackground(Color.black);
+            card2.setBackground(Color.black);
+            card1.setText("");
+            card2.setText("");
+            card1.setEnabled(false);
+            card2.setEnabled(false);
 
-            if (logik.getAnzPairsFound() == field.getAmountCards() / 2) {    //Spiel beendet?
-                //glückwunsch-> modal?
-                SpielFertig fertigesSpiel = new SpielFertig(winner );
-
+            if (logik.getAnzPairsFound() == field.getAmountCards() / 2){    //Spiel beendet?
+                setVisible(false);
+                SpielFertig fertigesSpiel = new SpielFertig(Integer.parseInt(pointLabel1.getText()), Integer.parseInt(pointLabel2.getText()),joker2, timer2);
             }
         }
+    }
+    public JFrame getFrame(){
+        return this;
     }
 
 

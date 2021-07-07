@@ -29,10 +29,4 @@ public class Credits {
 
         dialog.setVisible(true);
     }
-
-    public static void main(String[] args) {
-
-        Credits credits = new Credits();
-
-    }
 }

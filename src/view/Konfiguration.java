@@ -1,6 +1,8 @@
 package view;
 
 import model.Config;
+import model.Field;
+import model.Spieler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,8 +29,8 @@ public class Konfiguration extends JFrame {
     JButton timerSubmitButton;
     Config config = new Config();
     public static boolean variable;
-    public static boolean joker;
-    public static boolean timer;
+    public boolean joker;
+    public  boolean timer;
 
     public Konfiguration getKonfiguration() {
         return konfiguration;
@@ -67,14 +69,14 @@ public class Konfiguration extends JFrame {
         botPanel =new JPanel();
         //with Joker
         jokerPanel = new JPanel();
-        jokerLabel = new JLabel("Do you want to play with Jokers?   ");
+        jokerLabel = new JLabel("Do you want to play with a Timer?   ");
         jokerSubmitButton = new JButton("OK");
         withJoker = new JComboBox();
         withJoker.setModel(new DefaultComboBoxModel(withJokerArray));
 
         //with Timer
         timerPanel = new JPanel();
-        timerLabel = new JLabel("Do you want to play with Timer?    ");
+        timerLabel = new JLabel("Do you want to play with Jokers?    ");
         timerSubmitButton = new JButton("OK");
         withTimer = new JComboBox();
         withTimer.setModel(new DefaultComboBoxModel(withTimerArray));
@@ -154,11 +156,11 @@ public class Konfiguration extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
+                Spieler spieler1 = new Spieler("1. Spieler");
+                Spieler spieler2 = new Spieler("2. Spieler");
+                //Field field = new Field(joker);
+                Spiel spiel = new Spiel(spieler1, spieler2, joker, timer);
             }
         });
-    }
-
-    public static void main(String[] args) {
-        Konfiguration  k= new Konfiguration();
     }
 }

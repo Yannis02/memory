@@ -38,4 +38,8 @@ public class Card {
     public int getIdentificator(){
         return identificator;
     }
+
+    public int getPointsCard(){
+        return this.pointsNormalCard;
+    }
 }

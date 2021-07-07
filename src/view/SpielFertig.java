@@ -11,10 +11,15 @@ import java.awt.event.ActionListener;
 public class SpielFertig {
 
     private JTextArea contentArea;
+    private String gewinner;
     private Logik logik;
     private String test;
+    private boolean Dojoker;
+    private boolean Dotimer;
 
-    public SpielFertig(String winner) {
+    public SpielFertig(int punkteSpieler1, int punkteSpieler2, boolean joker, boolean timer) {
+        Dojoker = joker;
+        Dotimer = timer;
         JDialog ende = new JDialog();
         JPanel buttonPanel = new JPanel();
         JPanel view = new JPanel();
@@ -27,10 +32,26 @@ public class SpielFertig {
         ende.setBackground(new Color(21, 76, 121));
         ende.setModal(true);
 
-        contentArea = new JTextArea("Gratuliere, Sie haben das Spiel durchgespielt, wollen Sie das Spiel" +
-                " beenden?\n\n Dann klicken Sie auf den Beenden Button!\n\n" +
-                "Wollen Sie jedoch ein neues Spiel starten,\nso drücken Sie auf den Neues Spiel Button:\n\n" +
-                "Wollen Sie wieder zurück ins Startmenü so drücken Sie Startmenü");
+        if (punkteSpieler1 > punkteSpieler2) {
+            gewinner = "1. Spieler";
+        }
+        if (punkteSpieler1 < punkteSpieler2) {
+            gewinner = "2. Spieler";
+        }
+        if (punkteSpieler1 == punkteSpieler2) {
+            gewinner = "Unentschieden";
+        }
+        if (punkteSpieler1 != punkteSpieler2) {
+            contentArea = new JTextArea("Gratuliere, " + gewinner + ", Sie haben gewonnen, wollen Sie das Spiel" +
+                    " beenden?\n\n Dann klicken Sie auf den Beenden Button!\n\n" +
+                    "Wollen Sie jedoch ein neues Spiel starten,\nso drücken Sie auf den Neues Spiel Button:\n\n" +
+                    "Wollen Sie wieder zurück ins Startmenü so drücken Sie Startmenü");
+        }else {
+            contentArea = new JTextArea(gewinner + " , wollen Sie das Spiel" +
+                    " beenden?\n\n Dann klicken Sie auf den Beenden Button!\n\n" +
+                    "Wollen Sie jedoch ein neues Spiel starten,\nso drücken Sie auf den Neues Spiel Button:\n\n" +
+                    "Wollen Sie wieder zurück ins Startmenü so drücken Sie Startmenü");
+        }
         contentArea.setFont(new Font("Impact", Font.PLAIN, 20));
         contentArea.setBackground(new Color(21, 76, 121));
         contentArea.setEditable(false);
@@ -62,7 +83,8 @@ public class SpielFertig {
         startNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                logik.spiel();
+                ende.setVisible(false);
+                newGameGUI newGameGUI = new newGameGUI(punkteSpieler1, punkteSpieler2, Dojoker, Dotimer);
             }
         });
 
@@ -77,8 +99,4 @@ public class SpielFertig {
 
     }
 
-    public static void main(String[] args) {
-        String test = "1";
-        SpielFertig fertig = new SpielFertig(test);
-    }
 }

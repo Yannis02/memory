@@ -2,21 +2,21 @@ package control;
 
 import model.Field;
 import model.Spieler;
+import org.omg.CORBA.UserException;
 import view.Spiel;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Logik {
     private int anzKartenGedreht = 0;
     private int anzPairsFound = 0;
-    public String name1;
-    public String name2;
-    private boolean player1WillPlay = true;
+    private boolean player1WillPlay = false;
     private boolean switchPlayer=false;
     private String sourceCard1;
     private String sourceCard2;
 
-    private Timer timer;
+    private Timer timer = new Timer();
     private Field field;
     private Spieler spieler;
     private Spiel spiel;
@@ -27,7 +27,8 @@ public class Logik {
     public void spiel() {
         Spieler spieler1 = new Spieler("1. Spieler");
         Spieler spieler2 = new Spieler("2. Spieler");
-        Spiel spiel = new Spiel(spieler1, spieler2);
+        Spiel spiel = new Spiel(spieler1, spieler2, false, false);
+        
 
     }
 

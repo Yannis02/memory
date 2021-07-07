@@ -15,13 +15,22 @@ public class newGameGUI {
     private Logik logik;
     private Spieler spieler1;
     private Spieler spieler2;
+    private int punkteSpieler1;
+    private int punkteSpieler2;
+    private boolean doJoker;
+    private boolean doTimer;
 
-    public newGameGUI() {
+
+    public newGameGUI(int punkte1, int punkte2, boolean joker, boolean timer) {
+        doJoker = joker;
+        doTimer = timer;
+        punkteSpieler1 = punkte1;
+        punkteSpieler2 = punkte2;
         JDialog ende = new JDialog();
         JPanel buttonPanel = new JPanel();
         JPanel view = new JPanel();
-        JButton withScore = new JButton("Punkte nicht übernehmen");
-        JButton withoutScore = new JButton("Punkte übernehmen");
+        JButton withScore = new JButton("Punkte übernehmen");
+        JButton withoutScore = new JButton("Punkte nicht übernehmen");
 
         ende.setTitle("neues Spiel");
         ende.setSize(820, 500);
@@ -51,14 +60,23 @@ public class newGameGUI {
         withoutScore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Spiel spiel = new Spiel(spieler1, spieler2);
+                Spieler spieler1 = new Spieler("1. Spieler");
+                Spieler spieler2 = new Spieler("2. Spieler");
+                Spiel spiel = new Spiel(spieler1, spieler2, doTimer, doJoker);
+                ende.setVisible(false);
             }
         });
 
         withScore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Spiel spiel = new Spiel(spieler1, spieler2);
+
+                Spieler spieler1 = new Spieler("1. Spieler");
+                Spieler spieler2 = new Spieler("2. Spieler");
+                spieler1.setPunkte(punkteSpieler1);
+                spieler2.setPunkte(punkteSpieler2);
+                Spiel spiel = new Spiel(spieler1, spieler2, doTimer, doJoker);
+                ende.setVisible(false);
             }
         });
 
@@ -66,7 +84,4 @@ public class newGameGUI {
 
     }
 
-    public static void main(String[] args) {
-        newGameGUI gui = new newGameGUI();
-    }
 }
