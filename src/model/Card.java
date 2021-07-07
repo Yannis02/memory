@@ -2,44 +2,62 @@ package model;
 
 import java.awt.*;
 
+/**
+ * @author Yannis Lee
+ * @since 07.07.2021
+ * @version 1.0
+ *Dies ist die Klasse in welcher eine Karte, die dann auf einen Button kommt programmiert wird
+ */
+
 public class Card {
+    private int wert;
+    private final int points = 1;
+    private Color background;
 
-    private final int pointsNormalCard = 1;
-    private int value;
-    private Color backgroundcolor;
-    private int identificator;
+    /**
+     * Leerer Konstruktor
+     */
+    public Card(){}
 
-    public Card(){
-
+    /**
+     * Setzt eine Farbe als Hintergrund, durch ihren RGB Wert
+     * @param rot
+     * @param grün
+     * @param blau
+     */
+    public void setBackground(int rot, int grün, int blau){
+        this.background = new Color(rot,grün,blau);
     }
 
-    public void setBackgroundcolor(int r, int g, int b){
-        this.backgroundcolor = new Color(r,g,b);
+    /**
+     * Setter für den Wert
+     * @param wert
+     */
+    public void setWert(int wert){
+        this.wert = wert;
     }
 
-    public void setValue(int value){
-        this.value = value;
+    /**
+     * Getter für den Wert einer Karte
+     * @return wert
+     */
+    public int getWert(){
+        return wert;
     }
 
-    public void setIdentificator(int identificator){
-        this.identificator=identificator;
+    /**
+     * Getter für die Hintergrundfarbe
+     * @return background
+     */
+    public Color getBackground(){
+        return background;
     }
 
-    public void turn(){}
-
-    public Color getBackgroundcolor(){
-        return backgroundcolor;
-    }
-
-    public int getValue(){
-        return value;
-    }
-
-    public int getIdentificator(){
-        return identificator;
-    }
-
-    public int getPointsCard(){
-        return this.pointsNormalCard;
+    /**
+     * Getter für die Punkte
+     * @return points
+     */
+    public int getPoints(){
+        return this.points;
     }
 }

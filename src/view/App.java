@@ -2,77 +2,85 @@ package view;
 
 import control.Logik;
 import model.Spieler;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author Yannis Lee
+ * @since 07.07.2021
+ * @version 1.0
+ */
+
 public class App extends JFrame {
     private Logik logik;
-
     private JLabel titel;
-
     private JButton startGame;
     private JButton konfigurationen;
     private JButton ersteller;
-
+    private JPanel buttons;
     private JPanel buttonPanel;
-    private JPanel buttonBoxPanel;
+    private JPanel title;
 
-    private JPanel titlePanel;
-
-
+    /**
+     * Konstruktor der die Logik initialisiert und das StartGUI ladet
+     */
     public App() {
         logik = new Logik();
-
         setTitle("Memory");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
         getContentPane().setBackground(new Color(21,76,121));
-        setResizable(true);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setResizable(true);
 
         titel = new JLabel("Memory", SwingConstants.CENTER);
         titel.setForeground(Color.black);
+
+        //Buttons
         startGame = new JButton("Start Game");
         ersteller = new JButton("Made by");
         konfigurationen = new JButton("Settings");
 
+        //Border
+        EmptyBorder emptyBorder = new EmptyBorder(75, 0, 75, 0);
+        titel.setBorder(emptyBorder);
 
-        EmptyBorder border = new EmptyBorder(80, 0, 80, 0);
-        titel.setBorder(border);
+        //Setzen der Schriftart + Grösse der Buttons und des Titels
+        titel.setFont(new Font("Impact", Font.PLAIN, 70));
+        startGame.setFont(new Font("Impact", Font.PLAIN, 40));
+        konfigurationen.setFont(new Font("Impact", Font.PLAIN, 40));
+        ersteller.setFont(new Font("Impact", Font.PLAIN, 40));
 
-        titel.setFont(new Font("Impact", Font.PLAIN, 65));
-        startGame.setFont(new Font("Impact", Font.PLAIN, 45));
-        konfigurationen.setFont(new Font("Impact", Font.PLAIN, 45));
-        ersteller.setFont(new Font("Impact", Font.PLAIN, 45));
-
+        //Alignment für die Buttons
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
         konfigurationen.setAlignmentX(Component.CENTER_ALIGNMENT);
         ersteller.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-
-        buttonBoxPanel = new JPanel();
-        buttonBoxPanel.setLayout(new BoxLayout(buttonBoxPanel, BoxLayout.PAGE_AXIS));
-        buttonBoxPanel.add(startGame);
-        buttonBoxPanel.add(Box.createRigidArea(new Dimension(0, 45)));
-        buttonBoxPanel.add(konfigurationen);
-        buttonBoxPanel.add(Box.createRigidArea(new Dimension(0, 45)));
-        buttonBoxPanel.add(ersteller);
+        //Füllen des Buttonpanels mit den Buttons
         buttonPanel = new JPanel();
-        buttonPanel.add(buttonBoxPanel);
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
+        buttonPanel.add(startGame);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 45)));
+        buttonPanel.add(konfigurationen);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 45)));
+        buttonPanel.add(ersteller);
+        buttons = new JPanel();
+        buttons.add(buttonPanel);
 
-        buttonBoxPanel.setBackground(new Color(21,76,121));
+        //Setzen der Hintergrundfarben des Panels und der Buttons
         buttonPanel.setBackground(new Color(21,76,121));
+        buttons.setBackground(new Color(21,76,121));
 
-
+        //Setzen des Layouts und hinzufügen der Komponenten
         getContentPane().setLayout(new BorderLayout(1, 1));
-        getContentPane().add(buttonPanel, BorderLayout.CENTER);
+        getContentPane().add(buttons, BorderLayout.CENTER);
         getContentPane().add(titel, BorderLayout.NORTH);
 
-        //add ActionListener
+        //ActionListener für den StartGame Button
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,34 +88,29 @@ public class App extends JFrame {
                 logik.spiel();
             }
         });
+        //ActionListener für den Mady by Button
         ersteller.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Credits credits = new Credits();
             }
         });
+        //ActionListener für den Settings Button
         konfigurationen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setVisible(false);
                 Konfiguration konfiguration = new Konfiguration();
             }
         });
-
-
-
         setVisible(true);
-
     }
 
+    /**
+     * Main-Methode um das Memory zu starten
+     * @param args
+     */
     public static void main(String[] args) {
         App app = new App();
-        if (Konfiguration.variable == true){
-            System.out.println("Timer");
-        }
-        if (Konfiguration.variable == false){
-            System.out.println("Joker");
-        }
     }
-
-
 }
